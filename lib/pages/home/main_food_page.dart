@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
+import 'package:food_apps/utils/dimensions.dart';
 import 'package:food_apps/widgets/small_text.dart';
 
-import '../widgets/big_text.dart';
+import '../../widgets/big_text.dart';
 import 'food_page_body.dart';
 
 class MainFoodPage extends StatefulWidget {
@@ -18,10 +19,13 @@ class _MainFoodPageState extends State<MainFoodPage> {
     return Scaffold(
       body: Column(
         children: [
+          //Header container,
           Container(
             child: Container(
-              margin: EdgeInsets.only(top: 45, bottom: 15),
-              padding: EdgeInsets.only(left: 20, right: 20),
+              margin: EdgeInsets.only(
+                  top: Dimensions.height45, bottom: Dimensions.height15),
+              padding: EdgeInsets.only(
+                  left: Dimensions.width20, right: Dimensions.width20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -46,14 +50,13 @@ class _MainFoodPageState extends State<MainFoodPage> {
                   ),
                   Center(
                     child: Container(
-                      height: 45,
-                      width: 45,
-                      child: Icon(
-                        Icons.search_outlined,
-                        color: Colors.white,
-                      ),
+                      height: Dimensions.height45,
+                      width: Dimensions.height45,
+                      child: Icon(Icons.search_outlined,
+                          color: Colors.white, size: Dimensions.iconSize25),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius15),
                           color: AppColor.mainColor),
                     ),
                   ),
@@ -61,7 +64,13 @@ class _MainFoodPageState extends State<MainFoodPage> {
               ),
             ),
           ),
-          FoodPageBody(),
+
+          //Page body,
+          const Expanded(
+            child: SingleChildScrollView(
+              child: FoodPageBody(),
+            ),
+          ),
         ],
       ),
     );

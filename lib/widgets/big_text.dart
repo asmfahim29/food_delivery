@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_apps/utils/dimensions.dart';
 
 class BigText extends StatelessWidget {
   Color? color;
@@ -13,7 +14,7 @@ class BigText extends StatelessWidget {
     //So it's better to use hexadecimal color for anyConstant widget or class instead of constant name.
     this.color = const Color(0xff332d2b),
     required this.text,
-    this.size = 20,
+    this.size = 0,
     this.overflow = TextOverflow.ellipsis,
   }) : super(key: key);
 
@@ -27,7 +28,7 @@ class BigText extends StatelessWidget {
         fontFamily: 'Roboto',
         color: color,
         fontWeight: FontWeight.w400,
-        fontSize: size,
+        fontSize: size == 0 ? Dimensions.fontBigS20 : size,
       ),
     );
   }
