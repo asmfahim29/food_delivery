@@ -4,6 +4,7 @@ import 'package:food_apps/colors.dart';
 import 'package:food_apps/utils/dimensions.dart';
 import 'package:food_apps/widgets/app_column.dart';
 import 'package:food_apps/widgets/app_icon.dart';
+import 'package:food_apps/widgets/expandable_text.dart';
 
 import '../../widgets/big_text.dart';
 
@@ -16,6 +17,7 @@ class PopularFoodDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
+          //background image
           Positioned(
               left: 0,
               right: 0,
@@ -31,6 +33,7 @@ class PopularFoodDetail extends StatelessWidget {
                   ),
                 ),
               )),
+          //icon button(back and cart)
           Positioned(
             top: Dimensions.height45,
             left: Dimensions.width20,
@@ -43,6 +46,7 @@ class PopularFoodDetail extends StatelessWidget {
               ],
             ),
           ),
+          //introduction field
           Positioned(
               top: Dimensions.popularFoodImgSize - 20,
               bottom: 0,
@@ -69,7 +73,36 @@ class PopularFoodDetail extends StatelessWidget {
                     ),
                     BigText(
                       text: 'Introduce',
-                    )
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: ExpandableText(
+                            text:
+                                "I was there to have the sudden lunch with my family members."
+                                "We selected that restaurant because of Bhorta selection."
+                                "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
+                                "Very good classic and quick presentation of them made our lunch quick and satisfactory."
+                                "Must try outlet for local classical food (Bhorta) lovers."
+                                "I was there to have the sudden lunch with my family members."
+                                "We selected that restaurant because of Bhorta selection."
+                                "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
+                                "Very good classic and quick presentation of them made our lunch quick and satisfactory."
+                                "Must try outlet for local classical food (Bhorta) lovers."
+                                "I was there to have the sudden lunch with my family members."
+                                "We selected that restaurant because of Bhorta selection."
+                                "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
+                                "Very good classic and quick presentation of them made our lunch quick and satisfactory."
+                                "Must try outlet for local classical food (Bhorta) lovers."
+                                "I was there to have the sudden lunch with my family members."
+                                "We selected that restaurant because of Bhorta selection."
+                                "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
+                                "Very good classic and quick presentation of them made our lunch quick and satisfactory."
+                                "Must try outlet for local classical food (Bhorta) lovers."),
+                      ),
+                    ),
                   ],
                 ),
               )),
