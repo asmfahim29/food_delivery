@@ -35,7 +35,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                         topRight: Radius.circular(Dimensions.radius20))),
                 child: Center(
                     child: BigText(
-                  text: "Sliver app bar",
+                  text: "Pitha-Puli",
                   size: Dimensions.fontBigS26,
                 )),
               ),
@@ -108,21 +108,82 @@ class RecommendedFoodDetail extends StatelessWidget {
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppIcon(
-                icon: Icons.remove,
-                backgroundColor: AppColor.mainColor,
-                iconColor: Colors.white,
-              ),
-              AppIcon(
-                icon: Icons.add,
-                backgroundColor: AppColor.mainColor,
-                iconColor: Colors.white,
-              )
-            ],
-          )
+          Container(
+            padding: EdgeInsets.only(
+                left: Dimensions.width20 * 2.5,
+                right: Dimensions.width20 * 2.5,
+                top: Dimensions.height10,
+                bottom: Dimensions.height10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppIcon(
+                  icon: Icons.remove,
+                  backgroundColor: AppColor.mainColor,
+                  iconColor: Colors.white,
+                  iconSize: Dimensions.iconSize25,
+                ),
+                BigText(
+                  text: "\$12.88 " " X " " 0 ",
+                  color: AppColor.mainBlackColor,
+                  size: Dimensions.fontBigS26,
+                ),
+                AppIcon(
+                  icon: Icons.add,
+                  backgroundColor: AppColor.mainColor,
+                  iconColor: Colors.white,
+                  iconSize: Dimensions.iconSize25,
+                )
+              ],
+            ),
+          ),
+          Container(
+            height: Dimensions.bottomHeightBar,
+            padding: EdgeInsets.only(
+                top: Dimensions.height35,
+                bottom: Dimensions.height35,
+                left: Dimensions.width15,
+                right: Dimensions.width15),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(Dimensions.radius20 * 2),
+                    topRight: Radius.circular(Dimensions.radius20 * 2)),
+                color: AppColor.buttonBackgrndColor),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(
+                      top: Dimensions.height15,
+                      bottom: Dimensions.height15,
+                      left: Dimensions.width20,
+                      right: Dimensions.width20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius20),
+                      color: Colors.white),
+                  child: Icon(
+                    Icons.favorite,
+                    color: AppColor.mainColor,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      top: Dimensions.height15,
+                      bottom: Dimensions.height15,
+                      left: Dimensions.width20,
+                      right: Dimensions.width20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    color: AppColor.mainColor,
+                  ),
+                  child: BigText(
+                    text: '\$10 | Add to cart',
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
