@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_apps/pages/food/popular_food_details.dart';
+import 'package:food_apps/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
 
-void main() {
+import 'helper/dependancies.dart' as dep;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 
@@ -18,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const PopularFoodDetail(),
+      home: const MainFoodPage(),
     );
   }
 }
