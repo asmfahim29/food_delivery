@@ -3,30 +3,30 @@ import 'package:get/get.dart';
 
 import '../data/repositories/popular_product_repo.dart';
 
-class PopularProductController extends GetxController {
+class RecommendedProductController extends GetxController {
   //create class object or instance.
-  final RecommendedProductRepo popularProductRepo;
-  PopularProductController({required this.popularProductRepo});
+  final RecommendedProductRepo recommendedProductRepo;
+  RecommendedProductController({required this.recommendedProductRepo});
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
-  List<dynamic> _popularProductList = [];
-  List<dynamic> get popularProductList => _popularProductList;
+  List<dynamic> _recommendedProductList = [];
+  List<dynamic> get recommendedProductList => _recommendedProductList;
 
   Future<void> getPopularProductList() async {
-    Response response = await popularProductRepo.getPopularProductList();
+    Response response = await recommendedProductRepo.getPopularProductList();
     if (response.statusCode == 200) {
       print("Got Products");
 
-      _popularProductList = [];
+      _recommendedProductList = [];
       print("---------------------------------");
 
       //we need to get the data from json model to convert the json.
-      _popularProductList.addAll(Product.fromJson(response.body).products);
+      _recommendedProductList.addAll(Product.fromJson(response.body).products);
       print("---------------------------------");
 
       //we need to call update method it works as a setState((){})
-      print(_popularProductList);
+      print(_recommendedProductList);
       _isLoaded = true;
       update();
     } else {
