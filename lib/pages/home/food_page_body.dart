@@ -1,9 +1,13 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
+import 'package:food_apps/controllers/popular_product_controller.dart';
+import 'package:food_apps/models/popular_products_model.dart';
+import 'package:food_apps/utils/ap_constants.dart';
 import 'package:food_apps/utils/dimensions.dart';
 import 'package:food_apps/widgets/app_column.dart';
 import 'package:food_apps/widgets/icon_and_text_widget.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/big_text.dart';
 import '../../widgets/small_text.dart';
@@ -43,30 +47,42 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         //slider section
-        Container(
-          // color: Colors.red,
-          height: Dimensions.pageView,
-          //this pageView.builder acts like carouselSlider.
-          child: PageView.builder(
-              controller: pageController,
-              itemCount: 5,
-              itemBuilder: (context, position) {
-                return _buildPageItem(position);
-              }),
-        ),
+        GetBuilder<PopularProductController>(builder: (popularProducts) {
+          return popularProducts.isLoaded
+              ? Container(
+                  // color: Colors.red,
+                  height: Dimensions.pageView,
+                  //this pageView.builder acts like carouselSlider.
+                  child: PageView.builder(
+                      controller: pageController,
+                      itemCount: popularProducts.popularProductList.length,
+                      itemBuilder: (context, position) {
+                        return _buildPageItem(position,
+                            popularProducts.popularProductList[position]);
+                      }),
+                )
+              : CircularProgressIndicator(
+                  color: AppColor.mainColor,
+                );
+        }),
 
         //dots section
-        DotsIndicator(
-          dotsCount: 5,
-          position: _currentPageValue,
-          decorator: DotsDecorator(
-            activeColor: AppColor.mainColor,
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-          ),
-        ),
+        GetBuilder<PopularProductController>(builder: (popularProducts) {
+          return DotsIndicator(
+            dotsCount: popularProducts.popularProductList.isEmpty
+                ? 1
+                : popularProducts.popularProductList.length,
+            position: _currentPageValue,
+            decorator: DotsDecorator(
+              activeColor: AppColor.mainColor,
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+            ),
+          );
+        }),
 
         SizedBox(
           height: Dimensions.height35,
@@ -79,7 +95,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              BigText(text: 'Popular'),
+              BigText(text: 'Recommended'),
               SizedBox(
                 width: Dimensions.width10,
               ),
@@ -196,7 +212,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, ProductModel popularProductList) {
     //Zoomin Zoom-out of the slider y axis
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currentPageValue.floor()) {
@@ -239,9 +255,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               color: index.isEven ? Color(0xff69c5df) : Color(0xff9294cc),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
-                  "assets/images/curry1.png",
-                ),
+                image: NetworkImage(
+                    "${AppConstants.BASE_URL}/uploads/${popularProductList.img!}" //(!) Bang operator not be null
+                    ),
               ),
             ),
           ),
@@ -278,7 +294,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     right: Dimensions.width10,
                     top: Dimensions.height15),
                 child: AppColumn(
-                  text: 'Vorta-Vat',
+                  text: popularProductList.name!,
                 ),
               ),
             ),
