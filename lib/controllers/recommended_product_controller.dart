@@ -20,7 +20,6 @@ class RecommendedProductController extends GetxController {
       print("Got Recommended Products");
 
       _recommendedProductList = [];
-      print("---------------------------------");
 
       //we need to get the data from json model to convert the json.
       _recommendedProductList.addAll(Product.fromJson(response.body).products);

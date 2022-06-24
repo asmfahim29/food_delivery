@@ -19,11 +19,9 @@ class PopularProductController extends GetxController {
       print("Got Products");
 
       _popularProductList = [];
-      print("---------------------------------");
 
       //we need to get the data from json model to convert the json.
       _popularProductList.addAll(Product.fromJson(response.body).products);
-      print("---------------------------------");
 
       //we need to call update method it works as a setState((){})
       print(_popularProductList);

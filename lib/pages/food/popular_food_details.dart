@@ -1,18 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
+import 'package:food_apps/controllers/popular_product_controller.dart';
+import 'package:food_apps/utils/ap_constants.dart';
 import 'package:food_apps/utils/dimensions.dart';
 import 'package:food_apps/widgets/app_column.dart';
 import 'package:food_apps/widgets/app_icon.dart';
 import 'package:food_apps/widgets/expandable_text.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/big_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}) : super(key: key);
+  int pageId;
+  PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<PopularProductController>().popularProductList[pageId];
+    //debugPrint(pageId.toString());
+    //debugPrint(product.name.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -27,8 +35,8 @@ class PopularFoodDetail extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(
-                      "assets/images/food2.png",
+                    image: NetworkImage(
+                      "${AppConstants.BASE_URL}${AppConstants.UPLOAD_URL}${product.img!}",
                     ),
                   ),
                 ),
@@ -41,7 +49,12 @@ class PopularFoodDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back_ios),
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: AppIcon(icon: Icons.arrow_back_ios),
+                ),
                 AppIcon(icon: Icons.add_shopping_cart_outlined),
               ],
             ),
@@ -66,7 +79,7 @@ class PopularFoodDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppColumn(
-                      text: 'Vorta-Vat',
+                      text: product.name!,
                     ),
                     SizedBox(
                       height: Dimensions.height20,
@@ -79,28 +92,7 @@ class PopularFoodDetail extends StatelessWidget {
                     ),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: ExpandableText(
-                            text:
-                                "I was there to have the sudden lunch with my family members."
-                                "We selected that restaurant because of Bhorta selection."
-                                "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                                "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                                "Must try outlet for local classical food (Bhorta) lovers."
-                                "I was there to have the sudden lunch with my family members."
-                                "We selected that restaurant because of Bhorta selection."
-                                "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                                "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                                "Must try outlet for local classical food (Bhorta) lovers."
-                                "I was there to have the sudden lunch with my family members."
-                                "We selected that restaurant because of Bhorta selection."
-                                "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                                "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                                "Must try outlet for local classical food (Bhorta) lovers."
-                                "I was there to have the sudden lunch with my family members."
-                                "We selected that restaurant because of Bhorta selection."
-                                "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                                "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                                "Must try outlet for local classical food (Bhorta) lovers."),
+                        child: ExpandableText(text: product.description!),
                       ),
                     ),
                   ],
@@ -163,7 +155,7 @@ class PopularFoodDetail extends StatelessWidget {
                 color: AppColor.mainColor,
               ),
               child: BigText(
-                text: '\$10 | Add to cart',
+                text: "\$ ${product.price!} | Add to cart",
                 color: Colors.white,
               ),
             ),
