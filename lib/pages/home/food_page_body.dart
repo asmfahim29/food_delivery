@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
 import 'package:food_apps/controllers/popular_product_controller.dart';
+import 'package:food_apps/controllers/recommended_product_controller.dart';
 import 'package:food_apps/models/popular_products_model.dart';
 import 'package:food_apps/utils/ap_constants.dart';
 import 'package:food_apps/utils/dimensions.dart';
@@ -120,99 +121,111 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         ),
 
         //List of foods and images
-        ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            //if we remove Container we need to give shrinkWrap true
-            shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                    left: Dimensions.width10,
-                    right: Dimensions.width10,
-                    bottom: Dimensions.height10),
-                child: Row(
-                  children: [
-                    //image section
-                    Container(
-                      width: Dimensions.listViewImgSize,
-                      height: Dimensions.listViewImgSize,
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20),
-                        color: Colors.white38,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            "assets/images/curry1.png",
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    //text container
-                    Expanded(
-                      child: Container(
-                        height: Dimensions.listViewTextContSIze,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(Dimensions.radius20),
-                              bottomRight: Radius.circular(Dimensions.radius20),
+        GetBuilder<RecommendedProductController>(builder: (recommendedProduct) {
+          return recommendedProduct.isLoaded
+              ? ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  //if we remove Container we need to give shrinkWrap true
+                  shrinkWrap: true,
+                  itemCount: recommendedProduct.recommendedProductList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(
+                          left: Dimensions.width10,
+                          right: Dimensions.width10,
+                          bottom: Dimensions.height10),
+                      child: Row(
+                        children: [
+                          //image section
+                          Container(
+                            width: Dimensions.listViewImgSize,
+                            height: Dimensions.listViewImgSize,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius20),
+                              color: Colors.white38,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                //most important lines (xyzList[index]!.img!) ever for fetching network image.
+                                image: NetworkImage(
+                                  "${AppConstants.BASE_URL}${AppConstants.UPLOAD_URL}${recommendedProduct.recommendedProductList[index]!.img!}",
+                                ),
+                              ),
                             ),
-                            color: Colors.white),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: Dimensions.width10,
-                              right: Dimensions.width10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              BigText(
-                                  text: 'Nutritious food meal in Bangladesh'),
-                              SizedBox(
-                                height: Dimensions.height10,
-                              ),
-                              SmallText(
-                                  text: 'With Bangladeshi Characteristics'),
-                              SizedBox(
-                                height: Dimensions.height15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  IconAndTextWidget(
-                                    icon: Icons.circle_rounded,
-                                    iconColor: AppColor.iconColor1,
-                                    text: 'Normal',
-                                  ),
-                                  IconAndTextWidget(
-                                    icon: Icons.location_on_rounded,
-                                    iconColor: AppColor.mainColor,
-                                    text: '1.7km',
-                                  ),
-                                  IconAndTextWidget(
-                                    icon: Icons.access_time_rounded,
-                                    iconColor: AppColor.iconColor2,
-                                    text: '32min',
-                                  ),
-                                ],
-                              )
-                            ],
                           ),
-                        ),
+
+                          //text container
+                          Expanded(
+                            child: Container(
+                              height: Dimensions.listViewTextContSIze,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topRight:
+                                        Radius.circular(Dimensions.radius20),
+                                    bottomRight:
+                                        Radius.circular(Dimensions.radius20),
+                                  ),
+                                  color: Colors.white),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: Dimensions.width10,
+                                    right: Dimensions.width10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    BigText(
+                                        text:
+                                            'Nutritious food meal in Bangladesh'),
+                                    SizedBox(
+                                      height: Dimensions.height10,
+                                    ),
+                                    SmallText(
+                                        text:
+                                            'With Bangladeshi Characteristics'),
+                                    SizedBox(
+                                      height: Dimensions.height15,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        IconAndTextWidget(
+                                          icon: Icons.circle_rounded,
+                                          iconColor: AppColor.iconColor1,
+                                          text: 'Normal',
+                                        ),
+                                        IconAndTextWidget(
+                                          icon: Icons.location_on_rounded,
+                                          iconColor: AppColor.mainColor,
+                                          text: '1.7km',
+                                        ),
+                                        IconAndTextWidget(
+                                          icon: Icons.access_time_rounded,
+                                          iconColor: AppColor.iconColor2,
+                                          text: '32min',
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-              );
-            })
+                    );
+                  })
+              : CircularProgressIndicator(
+                  color: AppColor.mainColor,
+                );
+        }),
       ],
     );
   }
 
   Widget _buildPageItem(int index, ProductModel popularProductList) {
+    //it's a controller
     //Zoomin Zoom-out of the slider y axis
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currentPageValue.floor()) {
@@ -256,7 +269,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                    "${AppConstants.BASE_URL}/uploads/${popularProductList.img!}" //(!) Bang operator not be null
+                    "${AppConstants.BASE_URL}${AppConstants.UPLOAD_URL}${popularProductList.img!}" //(!) Bang operator not be null
                     ),
               ),
             ),

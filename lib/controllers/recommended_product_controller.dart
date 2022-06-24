@@ -1,7 +1,7 @@
-import 'package:food_apps/models/popular_products_model.dart';
 import 'package:get/get.dart';
 
-import '../data/repositories/popular_product_repo.dart';
+import '../data/repositories/recommended_product_repo.dart';
+import '../models/popular_products_model.dart';
 
 class RecommendedProductController extends GetxController {
   //create class object or instance.
@@ -13,24 +13,24 @@ class RecommendedProductController extends GetxController {
   List<dynamic> _recommendedProductList = [];
   List<dynamic> get recommendedProductList => _recommendedProductList;
 
-  Future<void> getPopularProductList() async {
-    Response response = await recommendedProductRepo.getPopularProductList();
+  Future<void> getRecommendedProductList() async {
+    Response response =
+        await recommendedProductRepo.getRecommendedProductList();
     if (response.statusCode == 200) {
-      print("Got Products");
+      print("Got Recommended Products");
 
       _recommendedProductList = [];
       print("---------------------------------");
 
       //we need to get the data from json model to convert the json.
       _recommendedProductList.addAll(Product.fromJson(response.body).products);
-      print("---------------------------------");
 
       //we need to call update method it works as a setState((){})
       print(_recommendedProductList);
       _isLoaded = true;
       update();
     } else {
-      print("No product found");
+      print("Couldn't get Recommended Products");
     }
   }
 }
