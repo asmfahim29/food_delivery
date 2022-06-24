@@ -5,7 +5,7 @@ import '../data/repositories/popular_product_repo.dart';
 
 class PopularProductController extends GetxController {
   //create class object or instance.
-  final RecommendedProductRepo popularProductRepo;
+  final PopularProductRepo popularProductRepo;
   PopularProductController({required this.popularProductRepo});
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;

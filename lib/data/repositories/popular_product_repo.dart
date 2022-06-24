@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 
 import '../api/api_client.dart';
 
-class RecommendedProductRepo extends GetxService {
+class PopularProductRepo extends GetxService {
   //this is the object or instance of apiClient class
   final ApiClient apiClient;
-  RecommendedProductRepo({required this.apiClient});
+  PopularProductRepo({required this.apiClient});
 
   Future<Response> getPopularProductList() async {
     //we have to create this url
