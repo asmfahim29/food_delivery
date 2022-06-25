@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
+import 'package:food_apps/helper/routes/route_helper.dart';
 import 'package:food_apps/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
 
@@ -23,10 +24,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MainFoodPage(),
+      home: MainFoodPage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }

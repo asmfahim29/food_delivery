@@ -1,25 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
+import 'package:food_apps/controllers/recommended_product_controller.dart';
+import 'package:food_apps/helper/routes/route_helper.dart';
+import 'package:food_apps/utils/ap_constants.dart';
 import 'package:food_apps/utils/dimensions.dart';
 import 'package:food_apps/widgets/app_icon.dart';
 import 'package:food_apps/widgets/big_text.dart';
 import 'package:food_apps/widgets/expandable_text.dart';
+import 'package:get/get.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+  int pageId;
+  RecommendedFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var recommendedProduct =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
+    // debugPrint(recommendedProduct.toString());
+    // debugPrint(recommendedProduct.name.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 80,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back_ios),
+                GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteHelper.getInitial());
+                    },
+                    child: AppIcon(icon: Icons.clear)),
                 AppIcon(icon: Icons.add_shopping_cart_outlined)
               ],
             ),
@@ -35,7 +49,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                         topRight: Radius.circular(Dimensions.radius20))),
                 child: Center(
                     child: BigText(
-                  text: "Pitha-Puli",
+                  text: recommendedProduct.name!,
                   size: Dimensions.fontBigS26,
                 )),
               ),
@@ -44,8 +58,8 @@ class RecommendedFoodDetail extends StatelessWidget {
             backgroundColor: Color(0xfff8f6f6),
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/images/food1.png",
+              background: Image.network(
+                "${AppConstants.BASE_URL}${AppConstants.UPLOAD_URL}${recommendedProduct.img!}",
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -57,48 +71,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(
                       left: Dimensions.width10, right: Dimensions.width10),
-                  child: ExpandableText(
-                      text:
-                          "I was there to have the sudden lunch with my family members."
-                          "We selected that restaurant because of Bhorta selection."
-                          "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                          "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                          "Must try outlet for local classical food (Bhorta) lovers."
-                          "I was there to have the sudden lunch with my family members."
-                          "We selected that restaurant because of Bhorta selection."
-                          "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                          "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                          "Must try outlet for local classical food (Bhorta) lovers."
-                          "I was there to have the sudden lunch with my family members."
-                          "We selected that restaurant because of Bhorta selection."
-                          "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                          "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                          "Must try outlet for local classical food (Bhorta) lovers."
-                          "I was there to have the sudden lunch with my family members."
-                          "We selected that restaurant because of Bhorta selection."
-                          "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                          "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                          "Must try outlet for local classical food (Bhorta) lovers."
-                          "I was there to have the sudden lunch with my family members."
-                          "We selected that restaurant because of Bhorta selection."
-                          "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                          "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                          "Must try outlet for local classical food (Bhorta) lovers."
-                          "I was there to have the sudden lunch with my family members."
-                          "We selected that restaurant because of Bhorta selection."
-                          "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                          "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                          "Must try outlet for local classical food (Bhorta) lovers."
-                          "I was there to have the sudden lunch with my family members."
-                          "We selected that restaurant because of Bhorta selection."
-                          "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                          "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                          "Must try outlet for local classical food (Bhorta) lovers."
-                          "I was there to have the sudden lunch with my family members."
-                          "We selected that restaurant because of Bhorta selection."
-                          "The decision we made, that was not wrong! We had huge quantity of Bhorta with rice there, which was very delicious."
-                          "Very good classic and quick presentation of them made our lunch quick and satisfactory."
-                          "Must try outlet for local classical food (Bhorta) lovers."),
+                  child: ExpandableText(text: recommendedProduct.description!),
                 )
               ],
             ),
@@ -124,7 +97,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   iconSize: Dimensions.iconSize25,
                 ),
                 BigText(
-                  text: "\$12.88 " " X " " 0 ",
+                  text: "\$ ${recommendedProduct.price!}  X  0 ",
                   color: AppColor.mainBlackColor,
                   size: Dimensions.fontBigS26,
                 ),
@@ -177,7 +150,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     color: AppColor.mainColor,
                   ),
                   child: BigText(
-                    text: '\$10 | Add to cart',
+                    text: '\$ ${recommendedProduct.price!} | Add to cart',
                     color: Colors.white,
                   ),
                 ),
