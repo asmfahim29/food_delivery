@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
+import 'package:food_apps/controllers/cart_controller.dart';
 import 'package:food_apps/controllers/popular_product_controller.dart';
 import 'package:food_apps/utils/ap_constants.dart';
 import 'package:food_apps/utils/dimensions.dart';
@@ -19,7 +19,8 @@ class PopularFoodDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var product =
         Get.find<PopularProductController>().popularProductList[pageId];
-    Get.find<PopularProductController>().initProduct();
+    Get.find<PopularProductController>()
+        .initProduct(product, Get.find<CartController>());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -140,7 +141,7 @@ class PopularFoodDetail extends StatelessWidget {
                       SizedBox(
                         width: Dimensions.width35 / 2,
                       ),
-                      BigText(text: popularProduct.quantity.toString()),
+                      BigText(text: popularProduct.inCartItems.toString()),
                       SizedBox(
                         width: Dimensions.width35 / 2,
                       ),
@@ -167,9 +168,14 @@ class PopularFoodDetail extends StatelessWidget {
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
                     color: AppColor.mainColor,
                   ),
-                  child: BigText(
-                    text: "\$ ${product.price!} | Add to cart",
-                    color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      popularProduct.addItem(product);
+                    },
+                    child: BigText(
+                      text: "\$ ${product.price!} | Add to cart",
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],

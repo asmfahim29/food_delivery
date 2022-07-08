@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_apps/controllers/cart_controller.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
 import 'package:food_apps/helper/routes/route_helper.dart';
 import 'package:food_apps/pages/home/main_food_page.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
     Get.find<RecommendedProductController>().getRecommendedProductList();
+    Get.find<CartController>();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
