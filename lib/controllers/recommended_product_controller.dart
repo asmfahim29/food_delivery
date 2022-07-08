@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../data/repositories/recommended_product_repo.dart';
@@ -17,19 +18,16 @@ class RecommendedProductController extends GetxController {
     Response response =
         await recommendedProductRepo.getRecommendedProductList();
     if (response.statusCode == 200) {
-      print("Got Recommended Products");
-
       _recommendedProductList = [];
 
       //we need to get the data from json model to convert the json.
       _recommendedProductList.addAll(Product.fromJson(response.body).products);
+      _isLoaded = true;
 
       //we need to call update method it works as a setState((){})
-      print(_recommendedProductList);
-      _isLoaded = true;
       update();
     } else {
-      print("Couldn't get Recommended Products");
+      debugPrint("Couldn't get Recommended Products");
     }
   }
 }
