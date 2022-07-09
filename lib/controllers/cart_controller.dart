@@ -11,6 +11,7 @@ class CartController extends GetxController {
   CartController({required this.cartRepo});
 
   //everything will store over _items={};
+  // save information as map
   final Map<int, CartModel> _items = {};
   Map<int, CartModel> get items => _items;
 

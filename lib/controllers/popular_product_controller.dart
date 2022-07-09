@@ -46,11 +46,11 @@ class PopularProductController extends GetxController {
     if (isIncrement) {
       //increase the quantity
       _quantity = checkQuantity(_quantity + 1);
-      print("increment  $_quantity");
+      print("number of items added: $_quantity");
     } else {
       //decrease quantity
       _quantity = checkQuantity(_quantity - 1);
-      print("decrement  $_quantity");
+      print("number of items removed: $_quantity");
     }
     update();
   }
