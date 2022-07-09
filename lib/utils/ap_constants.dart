@@ -8,5 +8,5 @@ class AppConstants {
   static const String UPLOAD_URL =
       "/uploads/"; //some problem here need to study.
 
-  // static const String TOKEN = "DBtoken";
+  static const String TOKEN = "DBtoken";
 }
