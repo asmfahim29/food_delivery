@@ -26,7 +26,6 @@ class PopularProductController extends GetxController {
     Response response = await popularProductRepo.getPopularProductList();
     if (response.statusCode == 200) {
       _popularProductList = [];
-
       //we need to get the data from json model to convert the json.
       _popularProductList.addAll(Product.fromJson(response.body).products);
       _isLoaded = true;
@@ -47,11 +46,11 @@ class PopularProductController extends GetxController {
     if (isIncrement) {
       //increase the quantity
       _quantity = checkQuantity(_quantity + 1);
-      print("increment  ${_quantity}");
+      print("increment  $_quantity");
     } else {
       //decrease quantity
       _quantity = checkQuantity(_quantity - 1);
-      print("decrement  ${_quantity}");
+      print("decrement  $_quantity");
     }
     update();
   }
@@ -99,21 +98,16 @@ class PopularProductController extends GetxController {
 
   //to fetch data from cartController
   void addItem(ProductModel product) {
-    // if (quantity > 0) {
     _cart.addItem(product, _quantity);
     _quantity = 0;
     _inCartItems = _cart.getQuantity(product);
     _cart.items.forEach((key, value) {
       print("The id is ${value.id},The quantity is ${value.quantity}");
     });
-    /* } else {
-      Get.snackbar(
-        "Item Count",
-        "You did not add any items",
-        backgroundColor: AppColor.mainColor,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.TOP,
-      );
-    }*/
+    update();
+  }
+
+  int get totalItems {
+    return _cart.totalItems;
   }
 }
