@@ -5,6 +5,7 @@ import 'package:food_apps/models/popular_products_model.dart';
 import 'package:get/get.dart';
 
 import '../data/repositories/popular_product_repo.dart';
+import '../models/cart_model.dart';
 
 class PopularProductController extends GetxController {
   //create class object or instance.
@@ -65,6 +66,12 @@ class PopularProductController extends GetxController {
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
+      //checking quantity<0 but if reduce more it shows the previous number.
+      //for this condition it can prevent.
+      if (_inCartItems > 0) {
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
       return 0;
     } else if ((_inCartItems + quantity) > 20) {
       Get.snackbar(
@@ -107,7 +114,13 @@ class PopularProductController extends GetxController {
     update();
   }
 
+  //cart count and use to shopping cart icon
   int get totalItems {
     return _cart.totalItems;
+  }
+
+  //List of selected items from the popular foods.
+  List<CartModel> get getItems {
+    return _cart.getItems;
   }
 }

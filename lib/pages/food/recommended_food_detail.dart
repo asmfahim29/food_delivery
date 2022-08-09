@@ -3,6 +3,7 @@ import 'package:food_apps/colors.dart';
 import 'package:food_apps/controllers/popular_product_controller.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
 import 'package:food_apps/helper/routes/route_helper.dart';
+import 'package:food_apps/pages/cart/cart_page.dart';
 import 'package:food_apps/utils/ap_constants.dart';
 import 'package:food_apps/utils/dimensions.dart';
 import 'package:food_apps/widgets/app_icon.dart';
@@ -48,11 +49,16 @@ class RecommendedFoodDetail extends StatelessWidget {
                           ? Positioned(
                               right: 0,
                               top: 0,
-                              child: AppIcon(
-                                icon: Icons.circle,
-                                size: 20,
-                                iconColor: Colors.transparent,
-                                backgroundColor: AppColor.mainColor,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(() => CartPage());
+                                },
+                                child: AppIcon(
+                                  icon: Icons.circle,
+                                  size: 20,
+                                  iconColor: Colors.transparent,
+                                  backgroundColor: AppColor.mainColor,
+                                ),
                               ),
                             )
                           : Container(),
@@ -173,7 +179,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(Dimensions.radius20 * 2),
                         topRight: Radius.circular(Dimensions.radius20 * 2)),
-                    color: AppColor.buttonBackgrndColor),
+                    color: AppColor.buttonBGColor),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
