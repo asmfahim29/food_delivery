@@ -98,4 +98,11 @@ class CartController extends GetxController {
     });
     return totalQuantity;
   }
+
+  //this function  would return all the cart objects that stored over items => _items.
+  List<CartModel> get getItems {
+    return _items.entries.map((e) {
+      return e.value;
+    }).toList();
+  }
 }
