@@ -1,3 +1,4 @@
+import 'package:food_apps/pages/cart/cart_page.dart';
 import 'package:food_apps/pages/food/popular_food_details.dart';
 import 'package:food_apps/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ class RouteHelper {
   static const String initial = "/";
   static const String popularFood = "/popular-food";
   static const String recommendedFood = "/recommended-food";
+  static const String cartPage = "/cart_page";
 
   //best way to justify the parameter is actual indicate the specific route
   static String getInitial() => initial;
@@ -16,6 +18,7 @@ class RouteHelper {
   //if we need to put and int into a string we use that way
   static String getRecommendedFood(int pageId) =>
       '$recommendedFood?pageId=$pageId';
+  static String getCartPage() => cartPage;
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => MainFoodPage()),
@@ -35,5 +38,11 @@ class RouteHelper {
           return RecommendedFoodDetail(pageId: int.parse(pageIdd!));
         },
         transition: Transition.fadeIn),
+    GetPage(
+        name: cartPage,
+        page: () {
+          return CartPage();
+        },
+        transition: Transition.fadeIn)
   ];
 }

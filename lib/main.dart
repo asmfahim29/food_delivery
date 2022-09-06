@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
     Get.find<CartController>();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: MainFoodPage(),
+      title: 'Food Delivery App',
+      home: const MainFoodPage(),
       initialRoute: RouteHelper.initial,
       getPages: RouteHelper.routes,
     );
