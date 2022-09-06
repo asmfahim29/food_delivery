@@ -23,14 +23,16 @@ class CartController extends GetxController {
       _items.update(product.id!, (value) {
         totalQuantity = value.quantity! + quantity;
         return CartModel(
-            id: value.id!,
-            name: value.name!,
-            price: value.price!,
-            img: value.img!,
-            quantity: value.quantity! +
-                quantity, //update the quantity by adding the new one in this way.
-            isExist: true,
-            time: DateTime.now().toString());
+          id: value.id!,
+          name: value.name!,
+          price: value.price!,
+          img: value.img!,
+          quantity: value.quantity! +
+              quantity, //update the quantity by adding the new one in this way.
+          isExist: true,
+          time: DateTime.now().toString(),
+          productModel: product,
+        );
       });
       if (totalQuantity <= 0) {
         _items.remove(product.id);
@@ -53,7 +55,8 @@ class CartController extends GetxController {
               img: product.img!,
               quantity: quantity,
               isExist: true,
-              time: DateTime.now().toString());
+              time: DateTime.now().toString(),
+              productModel: product);
         });
       } else {
         Get.snackbar(
@@ -65,6 +68,7 @@ class CartController extends GetxController {
         );
       }
     }
+    update();
   }
 
   //if product already exist or not
