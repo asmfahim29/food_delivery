@@ -14,10 +14,11 @@ class RouteHelper {
 
   //best way to justify the parameter is actual indicate the specific route
   static String getInitial() => initial;
-  static String getPopularFood(int pageId) => '$popularFood?pageId=$pageId';
+  static String getPopularFood(int pageId, String pPage) =>
+      '$popularFood?pageId=$pageId&pPage=$pPage';
   //if we need to put and int into a string we use that way
-  static String getRecommendedFood(int pageId) =>
-      '$recommendedFood?pageId=$pageId';
+  static String getRecommendedFood(int pageId, String rPage) =>
+      '$recommendedFood?pageId=$pageId&rPage=$rPage';
   static String getCartPage() => cartPage;
 
   static List<GetPage> routes = [
@@ -26,16 +27,21 @@ class RouteHelper {
         name: popularFood,
         page: () {
           var pageIdd = Get.parameters['pageId'];
+          var pPage = Get.parameters["pPage"];
           return PopularFoodDetail(
-              //jodi konovabei null exception handle na hoy tahole bujhte hbe variable samne howar karone ei problem hocche.
-              pageId: int.parse(pageIdd!));
+              //jodi konovabei null exception handle na hoy
+              // tahole bujhte hbe variable samne howar karone ei problem hocche.
+              pageId: int.parse(pageIdd!),
+              pPage: pPage!);
         },
         transition: Transition.fadeIn),
     GetPage(
         name: recommendedFood,
         page: () {
           var pageIdd = Get.parameters['pageId'];
-          return RecommendedFoodDetail(pageId: int.parse(pageIdd!));
+          var rPage = Get.parameters["rPage"];
+          return RecommendedFoodDetail(
+              pageId: int.parse(pageIdd!), rPage: rPage!);
         },
         transition: Transition.fadeIn),
     GetPage(

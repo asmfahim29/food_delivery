@@ -13,8 +13,10 @@ import 'package:get/get.dart';
 import '../../widgets/big_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  int pageId;
-  PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
+  final int pageId;
+  final String pPage;
+  const PopularFoodDetail({Key? key, required this.pageId, required this.pPage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +55,13 @@ class PopularFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.back();
+                    if (pPage == "cartPage") {
+                      Get.toNamed(RouteHelper.getCartPage());
+                    } else {
+                      Get.toNamed(RouteHelper.getInitial());
+                    }
                   },
-                  child: AppIcon(
+                  child: const AppIcon(
                     icon: Icons.arrow_back_ios,
                   ),
                 ),
@@ -70,9 +76,9 @@ class PopularFoodDetail extends StatelessWidget {
                       },
                       child: Stack(
                         children: [
-                          AppIcon(icon: Icons.shopping_cart_outlined),
+                          const AppIcon(icon: Icons.shopping_cart_outlined),
                           controller.totalItems >= 1
-                              ? Positioned(
+                              ? const Positioned(
                                   right: 0,
                                   top: 0,
                                   child: AppIcon(
@@ -185,7 +191,7 @@ class PopularFoodDetail extends StatelessWidget {
                           //call the method from controller
                           popularProduct.setQuantity(false);
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.remove,
                           color: AppColor.signColor,
                         ),
@@ -204,7 +210,7 @@ class PopularFoodDetail extends StatelessWidget {
                           //call the method from controller
                           popularProduct.setQuantity(true);
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.add,
                           color: AppColor.signColor,
                         ),

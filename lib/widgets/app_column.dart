@@ -28,25 +28,25 @@ class AppColumn extends StatelessWidget {
             //create list of childrens as many as you do
             Wrap(
                 children: List.generate(5, (index) {
-              return Icon(
+              return const Icon(
                 Icons.star,
                 color: AppColor.mainColor,
                 size: 15,
               );
             })),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             SmallText(
               text: '4.5',
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             SmallText(
               text: '1287',
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             SmallText(
@@ -59,7 +59,7 @@ class AppColumn extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: const [
             IconAndTextWidget(
               icon: Icons.circle_rounded,
               iconColor: AppColor.iconColor1,
