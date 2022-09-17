@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food_apps/colors.dart';
 import 'package:food_apps/controllers/cart_controller.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
 import 'package:food_apps/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'controllers/popular_product_controller.dart';
 import 'helper/dependancies.dart' as dep;
@@ -16,8 +18,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
@@ -26,6 +26,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Food Delivery App',
+      theme: ThemeData(
+        textTheme:
+            GoogleFonts.urbanistTextTheme(Theme.of(context).textTheme.apply(
+                  bodyColor: AppColor.mainColor,
+                  displayColor: AppColor.mainColor,
+                ),),
+      ),
       home: const MainFoodPage(),
       initialRoute: RouteHelper.initial,
       getPages: RouteHelper.routes,
