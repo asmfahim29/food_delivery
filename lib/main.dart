@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
 import 'package:food_apps/controllers/cart_controller.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
-import 'package:food_apps/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,14 +26,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Food Delivery App',
       theme: ThemeData(
-        textTheme:
-            GoogleFonts.urbanistTextTheme(Theme.of(context).textTheme.apply(
-                  bodyColor: AppColor.mainColor,
-                  displayColor: AppColor.mainColor,
-                ),),
+        textTheme: GoogleFonts.urbanistTextTheme(
+          Theme.of(context).textTheme.apply(
+                bodyColor: AppColor.mainColor,
+                displayColor: AppColor.mainColor,
+              ),
+        ),
       ),
-      home: const MainFoodPage(),
-      initialRoute: RouteHelper.initial,
+      // home: const MainFoodPage(),
+      initialRoute: RouteHelper.getInitial(),
       getPages: RouteHelper.routes,
     );
   }
