@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
               ),
         ),
       ),
-      // home: const MainFoodPage(),
-      initialRoute: RouteHelper.getInitial(),
+      // home: const SplashScreen(),
+      initialRoute: RouteHelper.getSplashPage(),
       getPages: RouteHelper.routes,
     );
   }
