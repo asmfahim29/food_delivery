@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+/*import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';*/
+
+import '../../colors.dart';
 import 'main_food_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  late PersistentTabController _controller;
+  /*late PersistentTabController _controller;*/
   List pages = [
     MainFoodPage(),
     Container(
@@ -48,14 +49,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  @override
+/*  @override
   void initState() {
     // TODO: implement initState
     _controller = PersistentTabController(initialIndex: 0);
     super.initState();
-  }
+  }*/
 
-  List<Widget> _buildScreens() {
+  /* List<Widget> _buildScreens() {
     return [
       MainFoodPage(),
       Container(
@@ -83,9 +84,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     ];
-  }
+  }*/
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
+  /* List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.home),
@@ -112,9 +113,9 @@ class _HomePageState extends State<HomePage> {
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
     ];
-  }
+  }*/
 
-  @override
+/*  @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
@@ -149,10 +150,10 @@ class _HomePageState extends State<HomePage> {
       navBarStyle:
           NavBarStyle.style1, // Choose the nav bar style with this property.
     );
-  }
+  }*/
 
   //our made design
-/*  @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[_selectedIndex],
@@ -176,5 +177,5 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-  }*/
+  }
 }

@@ -1,18 +1,21 @@
 import 'package:food_apps/pages/cart/cart_page.dart';
 import 'package:food_apps/pages/food/popular_food_details.dart';
 import 'package:food_apps/pages/home/home_page.dart';
+import 'package:food_apps/pages/splash/splash_page.dart';
 import 'package:get/get.dart';
 
 import '../../pages/food/recommended_food_detail.dart';
 
 class RouteHelper {
   //of course there is routes register for it
+  static const String splashPage = "/splash-page";
   static const String initial = "/";
   static const String popularFood = "/popular-food";
   static const String recommendedFood = "/recommended-food";
   static const String cartPage = "/cart_page";
 
   //best way to justify the parameter is actual indicate the specific route
+  static String getSplashPage() => splashPage;
   static String getInitial() => initial;
   static String getPopularFood(int pageId, String pPage) =>
       '$popularFood?pageId=$pageId&pPage=$pPage';
@@ -22,6 +25,7 @@ class RouteHelper {
   static String getCartPage() => cartPage;
 
   static List<GetPage> routes = [
+    GetPage(name: splashPage, page: () => SplashScreen()),
     GetPage(name: initial, page: () => HomePage()),
     GetPage(
         name: popularFood,
