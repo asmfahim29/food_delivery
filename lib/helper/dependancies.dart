@@ -7,8 +7,12 @@ import 'package:food_apps/data/repositories/popular_product_repo.dart';
 import 'package:food_apps/data/repositories/recommended_product_repo.dart';
 import 'package:food_apps/utils/ap_constants.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> init() async {
+  //local storage
+  final sharedPreferences = await SharedPreferences.getInstance();
+  Get.lazyPut(() => sharedPreferences);
   //api client
   Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.BASE_URL));
 
@@ -16,7 +20,7 @@ Future<void> init() async {
   //repos are dedicated to get and store data from anywhere.
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
-  Get.lazyPut(() => CartRepo());
+  Get.lazyPut(() => CartRepo(sharedPreferences: Get.find()));
 
   //controllers
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
