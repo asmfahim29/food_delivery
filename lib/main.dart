@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_apps/colors.dart';
+import 'package:food_apps/controllers/cart_controller.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
-import 'package:food_apps/helper/routes/route_helper.dart';
-import 'package:food_apps/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'controllers/popular_product_controller.dart';
 import 'helper/dependancies.dart' as dep;
+import 'helper/routes/route_helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,18 +16,33 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Get.find<PopularProductController>().getPopularProductList();
-    Get.find<RecommendedProductController>().getRecommendedProductList();
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: MainFoodPage(),
-      initialRoute: RouteHelper.initial,
-      getPages: RouteHelper.routes,
-    );
+
+    /*//if we don't have this the local storage information will gone after restarting the application
+    Get.find<CartController>().getCartData();
+    */
+    Get.find<CartController>().getCartData();
+    return GetBuilder<PopularProductController>(builder: (_) {
+      return GetBuilder<RecommendedProductController>(builder: (_) {
+        return GetBuilder<CartController>(builder: (_) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Food Delivery App',
+            theme: ThemeData(
+              textTheme: GoogleFonts.asulTextTheme(
+                Theme.of(context).textTheme.apply(
+                      bodyColor: AppColor.mainColor,
+                      displayColor: AppColor.mainColor,
+                    ),
+              ),
+            ),
+            //home: const SplashScreen(),
+            initialRoute: RouteHelper.getSplashPage(),
+            getPages: RouteHelper.routes,
+          );
+        });
+      });
+    });
   }
 }

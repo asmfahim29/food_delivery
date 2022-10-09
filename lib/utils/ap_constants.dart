@@ -9,4 +9,6 @@ class AppConstants {
       "/uploads/"; //some problem here need to study.
 
   static const String TOKEN = "DBtoken";
+  static const String CART_LIST = "Cart-List";
+  static const String CART_HISTORY_LIST = "cart-history-list";
 }

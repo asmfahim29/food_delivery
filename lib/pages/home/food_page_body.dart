@@ -42,6 +42,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   @override
   void dispose() {
     pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -90,7 +91,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           height: Dimensions.height35,
         ),
 
-        //popular text
+        //Recommended text
         Container(
           margin: EdgeInsets.only(
               left: Dimensions.width20, right: Dimensions.width20),
@@ -133,7 +134,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecommendedFood(index));
+                        Get.toNamed(RouteHelper.getRecommendedFood(
+                            index, "recommended"));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -197,7 +199,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
-                                        children: [
+                                        children: const [
                                           IconAndTextWidget(
                                             icon: Icons.circle_rounded,
                                             iconColor: AppColor.iconColor1,
@@ -225,7 +227,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ),
                     );
                   })
-              : CircularProgressIndicator(
+              : const CircularProgressIndicator(
                   color: AppColor.mainColor,
                 );
         }),
@@ -269,7 +271,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             onTap: () {
               Get.toNamed(
                 //we are passing list[index] as pageId to the next page
-                RouteHelper.getPopularFood(index),
+                RouteHelper.getPopularFood(index, "home"),
               );
             },
             child: Container(
