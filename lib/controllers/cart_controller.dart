@@ -12,7 +12,7 @@ class CartController extends GetxController {
 
   //everything will store over _items={};
   // save information as map
-  final Map<int, CartModel> _items = {};
+  Map<int, CartModel> _items = {};
   Map<int, CartModel> get items => _items;
 
   //added product to the cart
@@ -113,10 +113,37 @@ class CartController extends GetxController {
   }
 
   int get totalAmount {
-    var totalCartPrice = 0;
+    var total = 0;
     _items.forEach((key, value) {
-      totalCartPrice = value.quantity! * value.price!;
+      total += value.quantity! * value.price!;
     });
-    return 0;
+    return total;
+  }
+
+  //get cart Data only for store data in sharedPreference
+  List<CartModel> storageItems =[];
+  List<CartModel> getCartData(){
+
+    setCart = cartRepo.getCartList();
+
+    return storageItems;
+  }
+
+  //accept things
+  set setCart(List<CartModel> items){
+    storageItems = items;
+    print("Length of items is: ${storageItems.length.toString()}");
+    for(int i =0; i<storageItems.length;i++){
+      _items.putIfAbsent(storageItems[i].productModel!.id!, () => storageItems[i]);
+    }
+  }
+
+  void addToHistory(){
+    cartRepo.addToCartHistoryList();
+    clear();
+  }
+  void clear(){
+    _items = {};
+    update();
   }
 }

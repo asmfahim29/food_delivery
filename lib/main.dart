@@ -19,6 +19,11 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+    /*//if we don't have this the local storage information will gone after restarting the application
+    Get.find<CartController>().getCartData();
+    */
+    Get.find<CartController>().getCartData();
     return GetBuilder<PopularProductController>(builder: (_) {
       return GetBuilder<RecommendedProductController>(builder: (_) {
         return GetBuilder<CartController>(builder: (_) {
@@ -26,7 +31,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Food Delivery App',
             theme: ThemeData(
-              textTheme: GoogleFonts.urbanistTextTheme(
+              textTheme: GoogleFonts.asulTextTheme(
                 Theme.of(context).textTheme.apply(
                       bodyColor: AppColor.mainColor,
                       displayColor: AppColor.mainColor,

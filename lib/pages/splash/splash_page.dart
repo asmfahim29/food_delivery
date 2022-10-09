@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:food_apps/helper/routes/route_helper.dart';
 import 'package:food_apps/utils/dimensions.dart';
