@@ -14,8 +14,9 @@ class CartRepo {
 
   void addToCartList(List<CartModel> cartList) {
     //sharedPreferences.remove(AppConstants.CART_LIST);(Only for checking if the process is ok or not)
-    //sharedPreferences.remove(AppConstants.CART_LIST);
-    //sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
+/*    sharedPreferences.remove(AppConstants.CART_LIST);
+    sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);*/
+    String time = DateTime.now().toString();
     cart = [];
     /*
     convert objects to String cz sharedPrefs only accepts String value
@@ -25,20 +26,24 @@ class CartRepo {
       cart.add(jsonEncode(element));
     });*/
     //fancy way of decoding
-    cartList.forEach((element) => cart.add(jsonEncode(element)));
+    cartList.forEach((element){
+      element.time = time;
+      return cart.add(jsonEncode(element));
+    });
 
     // string akare sharedPref kaj kore, data save kore
     sharedPreferences.setStringList(AppConstants.CART_LIST, cart);
     // print(
     //     "Saved Value to SHaredPref : ${sharedPreferences.getStringList(AppConstants.CART_LIST)}");
-    getCartList();
+    // getCartList();
   }
 
   List<CartModel> getCartList() {
     List<String> carts = [];
 
     if (sharedPreferences.containsKey(AppConstants.CART_LIST)) {
-      carts = sharedPreferences.getStringList(AppConstants.CART_LIST)!;
+/*      carts = sharedPreferences.getStringList(AppConstants.CART_LIST)!;
+      carts = sharedPreferences.getStringList(AppConstants.CART_HISTORY_LIST)!;*/
       print("Inside getCartList ${carts.toString()}");
     }
     List<CartModel> cartList = [];
@@ -84,6 +89,9 @@ class CartRepo {
     removeCart();
     sharedPreferences.setStringList(AppConstants.CART_HISTORY_LIST, cartHistory);
     print("History list length is ${getCartHistoryList().length.toString()}");
+    for(int j=0 ; j<getCartHistoryList().length; j++){
+      print("$j number order => Time for created the history ${getCartHistoryList()[j].time.toString()}\n");
+    }
   }
   void removeCart(){
     cart = [];
