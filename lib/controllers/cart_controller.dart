@@ -121,29 +121,34 @@ class CartController extends GetxController {
   }
 
   //get cart Data only for store data in sharedPreference
-  List<CartModel> storageItems =[];
-  List<CartModel> getCartData(){
-
+  List<CartModel> storageItems = [];
+  List<CartModel> getCartData() {
     setCart = cartRepo.getCartList();
 
     return storageItems;
   }
 
   //accept things
-  set setCart(List<CartModel> items){
+  set setCart(List<CartModel> items) {
     storageItems = items;
     print("Length of items is: ${storageItems.length.toString()}");
-    for(int i =0; i<storageItems.length;i++){
-      _items.putIfAbsent(storageItems[i].productModel!.id!, () => storageItems[i]);
+    for (int i = 0; i < storageItems.length; i++) {
+      _items.putIfAbsent(
+          storageItems[i].productModel!.id!, () => storageItems[i]);
     }
   }
 
-  void addToHistory(){
+  void addToHistory() {
     cartRepo.addToCartHistoryList();
     clear();
   }
-  void clear(){
+
+  void clear() {
     _items = {};
     update();
+  }
+
+  List<CartModel> getCartHistoryList() {
+    return cartRepo.getCartHistoryList();
   }
 }
