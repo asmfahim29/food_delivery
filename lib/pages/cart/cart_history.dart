@@ -1,20 +1,26 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
 import 'package:food_apps/controllers/cart_controller.dart';
+import 'package:food_apps/helper/routes/route_helper.dart';
 import 'package:food_apps/utils/ap_constants.dart';
 import 'package:food_apps/utils/dimensions.dart';
-import 'package:food_apps/widgets/small_text.dart';
-import 'package:get/get.dart';
 import 'package:food_apps/widgets/app_icon.dart';
 import 'package:food_apps/widgets/big_text.dart';
+import 'package:food_apps/widgets/small_text.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import '../../models/cart_model.dart';
 
 class CartHistory extends StatelessWidget {
   const CartHistory({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var getCartHistoryList = Get.find<CartController>().getCartHistoryList();
+    var getCartHistoryList =
+        Get.find<CartController>().getCartHistoryList().reversed.toList();
     Map<String, int> cartItemsPerOrder = Map();
 
     for (int i = 0; i < getCartHistoryList.length; i++) {
@@ -27,14 +33,21 @@ class CartHistory extends StatelessWidget {
     }
     print('cart adding time is : \n$cartItemsPerOrder');
 
-    List<int> cartOrderTimeToList() {
+    List<int> cartItemsPerOrderToList() {
       return cartItemsPerOrder.entries.map((e) => e.value).toList();
 //     return cartItemsPerOrder.entries.map((e){
 //         return e.value;
 //     }).toList();
     }
 
-    List<int> itemsPerOrder = cartOrderTimeToList(); //2,2,3
+    List<String> carOrderTimeToList() {
+      return cartItemsPerOrder.entries.map((e) => e.key).toList();
+//     return cartItemsPerOrder.entries.map((e){
+//         return e.value;
+//     }).toList();
+    }
+
+    List<int> itemsPerOrder = cartItemsPerOrderToList(); //2,2,3
     print(itemsPerOrder);
 
     //by doing this we can actually know when was my first order as the inner loop finishes
@@ -82,19 +95,19 @@ class CartHistory extends StatelessWidget {
                     children: [
                       for (int i = 0; i < itemsPerOrder.length; i++)
                         Container(
-                          height: 120,
+                          height: Dimensions.height20 * 7,
                           margin: EdgeInsets.only(bottom: Dimensions.height20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               (() {
                                 DateTime parseDate =
-                                    DateFormat('yyyy-MM-dd HH:mm:ss')
-                                        .parse(getCartHistoryList[i].time!);
+                                    DateFormat('yyyy-MM-dd HH:mm:ss').parse(
+                                        getCartHistoryList[listCounter].time!);
                                 var inputDate =
                                     DateTime.parse(parseDate.toString());
                                 var outputformat =
-                                    DateFormat('MM/dd/yyyy   hh:mm: a');
+                                    DateFormat('MM/dd/yyyy   hh:mm a');
                                 var outputDate = outputformat.format(inputDate);
                                 return BigText(text: outputDate);
                               }()),
@@ -156,23 +169,51 @@ class CartHistory extends StatelessWidget {
                                           text: "${itemsPerOrder[i]} Items",
                                           color: AppColor.titleColor,
                                         ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
+                                        GestureDetector(
+                                          onTap: () {
+                                            /*var orderTime =
+                                                carOrderTimeToList();
+                                            print('Doing test ${orderTime[i]}');
+                                            print(
+                                                'how many items per row ${itemsPerOrder[i]}');*/
+                                            var orderTime =
+                                                carOrderTimeToList();
+                                            Map<int, CartModel> moreOrder = {};
+                                            //comparison
+                                            for (int j = 0; j < getCartHistoryList.length; j++)
+                                            {
+                                              if (getCartHistoryList[j].time == orderTime[i])
+                                              {
+                                                moreOrder.putIfAbsent(
+                                                    getCartHistoryList[j].id!,
+                                                    () => CartModel.fromJson(
+                                                        jsonDecode(jsonEncode(getCartHistoryList[j])))
+                                                );
+                                              }
+                                            }
+                                            Get.find<CartController>().setItems = moreOrder;
+                                            Get.find<CartController>().addToCartList();
+                                            Get.toNamed(RouteHelper.cartPage);
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
                                               horizontal: Dimensions.width10,
-                                              vertical:
-                                                  Dimensions.height10 / 2),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                Dimensions.radius15 / 2),
-                                            border: Border.all(
-                                                width: 1,
-                                                color: AppColor.mainColor),
+                                              vertical: Dimensions.height10 / 2,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      Dimensions.radius15 / 2),
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: AppColor.mainColor),
+                                            ),
+                                            child: SmallText(
+                                              text: 'one more',
+                                              color: AppColor.mainColor,
+                                            ),
                                           ),
-                                          child: SmallText(
-                                            text: 'one more',
-                                            color: AppColor.mainColor,
-                                          ),
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),

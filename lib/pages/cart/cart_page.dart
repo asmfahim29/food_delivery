@@ -93,14 +93,24 @@ class CartPage extends StatelessWidget {
                                     print("find the recommended ID");
                                     Get.toNamed(RouteHelper.getPopularFood(
                                         popularIndex, "cartPage"));
+
                                   } else {
                                     var recommendedIndex =
                                         Get.find<RecommendedProductController>()
                                             .recommendedProductList
                                             .indexOf(
                                                 _cartList[index].productModel!);
-                                    Get.toNamed(RouteHelper.getRecommendedFood(
-                                        recommendedIndex, "cartPage"));
+                                    if(recommendedIndex < 0){
+                                      Get.snackbar(
+                                        "Hsitory Product",
+                                        "Product review is not available",
+                                        backgroundColor: AppColor.mainColor,
+                                        colorText: Colors.white
+                                      );
+                                    }else{
+                                      Get.toNamed(RouteHelper.getRecommendedFood(
+                                          recommendedIndex, "cartPage"));
+                                    }
                                   }
                                 },
                                 child: Container(
