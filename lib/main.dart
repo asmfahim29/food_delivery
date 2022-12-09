@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
 import 'package:food_apps/controllers/cart_controller.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
-import 'package:food_apps/pages/splash/splash_page.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'controllers/popular_product_controller.dart';
@@ -19,7 +18,6 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
     /*//if we don't have this the local storage information will gone after restarting the application
     Get.find<CartController>().getCartData();
     */
