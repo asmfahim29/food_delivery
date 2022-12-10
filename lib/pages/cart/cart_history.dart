@@ -80,6 +80,7 @@ class CartHistory extends StatelessWidget {
                 BigText(
                   text: 'Cart History',
                   color: Colors.white,
+                  size: 25,
                 ),
                 AppIcon(
                   icon: Icons.shopping_cart_outlined,

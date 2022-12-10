@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:food_apps/pages/auth/signup_page.dart';
 import 'package:food_apps/pages/cart/cart_history.dart';
 
 /*import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';*/
 
 import '../../colors.dart';
+import '../account/account_page.dart';
 import 'main_food_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,23 +20,9 @@ class _HomePageState extends State<HomePage> {
   /*late PersistentTabController _controller;*/
   List pages = [
     MainFoodPage(),
-    Container(
-      child: Center(
-        child: Text(
-          "Next Page",
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    ),
+    SignUpPage(),
     CartHistory(),
-    Container(
-      child: Center(
-        child: Text(
-          "Next Next Next Page",
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    ),
+    AccountPage(),
   ];
 
   void onTapNav(int index) {
