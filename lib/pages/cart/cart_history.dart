@@ -14,7 +14,8 @@ class CartHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var getCartHistoryList = Get.find<CartController>().getCartHistoryList();
+    var getCartHistoryList =
+        Get.find<CartController>().getCartHistoryList().reversed.toList();
     Map<String, int> cartItemsPerOrder = Map();
 
     for (int i = 0; i < getCartHistoryList.length; i++) {
@@ -156,21 +157,28 @@ class CartHistory extends StatelessWidget {
                                           text: "${itemsPerOrder[i]} Items",
                                           color: AppColor.titleColor,
                                         ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: Dimensions.width10,
-                                              vertical:
-                                                  Dimensions.height10 / 2),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                Dimensions.radius15 / 2),
-                                            border: Border.all(
-                                                width: 1,
-                                                color: AppColor.mainColor),
-                                          ),
-                                          child: SmallText(
-                                            text: 'one more',
-                                            color: AppColor.mainColor,
+                                        GestureDetector(
+                                          onTap: () {
+                                            print(
+                                                'Doing test ${itemsPerOrder[i]}');
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: Dimensions.width10,
+                                                vertical:
+                                                    Dimensions.height10 / 2),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      Dimensions.radius15 / 2),
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: AppColor.mainColor),
+                                            ),
+                                            child: SmallText(
+                                              text: 'one more',
+                                              color: AppColor.mainColor,
+                                            ),
                                           ),
                                         )
                                       ],
