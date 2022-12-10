@@ -13,8 +13,7 @@ class CartRepo {
   List<String> cart = [];
 
   void addToCartList(List<CartModel> cartList) {
-    // sharedPreferences.remove(AppConstants
-    //     .CART_LIST); //(Only for checking if the process is ok or not)
+ //(Only for checking if the process is ok or not) remove everything from cart list and history list from local
 /*    sharedPreferences.remove(AppConstants.CART_LIST);
     sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);*/
     String time = DateTime.now().toString();
