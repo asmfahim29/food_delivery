@@ -12,7 +12,8 @@ class SignUpPage extends StatelessWidget {
           Container(
             child: CircleAvatar(
               radius: 80,
-              backgroundImage: AssetImage('assets/images/logo part 1.png'),
+                backgroundColor: Colors.white,
+                backgroundImage: AssetImage('assets/images/splLogo.png'),
             ),
           ),
         ],
