@@ -1,13 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
+import 'package:food_apps/pages/auth/signup_page.dart';
 import 'package:food_apps/utils/dimensions.dart';
 import 'package:food_apps/widgets/app_text_field.dart';
 import 'package:food_apps/widgets/big_text.dart';
 import 'package:get/get.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class SignInPage extends StatelessWidget {
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,29 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
             ),
+            Container(
+              width: double.maxFinite,
+              margin: EdgeInsets.only(left: Dimensions.width20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Hello',
+                    style: TextStyle(
+                        fontSize: Dimensions.fontBigS20 * 4,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Sign into your account',
+                    style: TextStyle(
+                      fontSize: Dimensions.fontBigS20,
+                      color: Colors.grey[500],
+                    ),
+                  ),
+                ],
+              ),
+            ),
             AppTextField(
               textEditingController: emailController,
               icon: Icons.email_outlined,
@@ -54,21 +78,24 @@ class SignUpPage extends StatelessWidget {
             SizedBox(
               height: Dimensions.height20,
             ),
-            AppTextField(
-              textEditingController: nameController,
-              icon: Icons.person_outline,
-              hintText: 'Enter name',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: Dimensions.width20),
+                  child: RichText(
+                      text: TextSpan(
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () => Get.back(),
+                          text: "Sign into your account",
+                          style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: Dimensions.fontBigS20))),
+                ),
+              ],
             ),
             SizedBox(
-              height: Dimensions.height20,
-            ),
-            AppTextField(
-              textEditingController: phoneController,
-              icon: Icons.phone_outlined,
-              hintText: 'Enter phone',
-            ),
-            SizedBox(
-              height: Dimensions.height20,
+              height: Dimensions.height20 * 3,
             ),
             Container(
               height: Dimensions.screenHeight / 13,
@@ -79,42 +106,31 @@ class SignUpPage extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: BigText(
-                text: "Sign up",
+                text: "Sign in",
                 size: Dimensions.fontBigS26,
                 color: Colors.white,
               ),
             ),
-            RichText(
-                text: TextSpan(
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => Get.back(),
-                    text: "Have an account already?",
-                    style: TextStyle(
-                        color: Colors.grey[500],
-                        fontSize: Dimensions.fontBigS20))),
             SizedBox(
               height: Dimensions.screenHeight * .05,
             ),
             RichText(
               text: TextSpan(
-                text: "Sign up using one of the following",
-                style: TextStyle(
-                    color: Colors.grey[500], fontSize: Dimensions.fontBigS16),
-              ),
-            ),
-            Wrap(
-              children: List.generate(
-                3,
-                (index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircleAvatar(
-                    radius: Dimensions.radius30,
-                    backgroundColor: Colors.white,
-                    backgroundImage:
-                        AssetImage('assets/images/' + signupImage[index]),
-                  ),
-                ),
-              ),
+                  text: "Don\'t have an account?",
+                  style: TextStyle(
+                      color: Colors.grey[500], fontSize: Dimensions.fontBigS20),
+                  children: [
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => Get.to(() => SignUpPage(),
+                            transition: Transition.fade),
+                      text: "Create",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: Dimensions.fontBigS20,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ]),
             ),
           ],
         ),

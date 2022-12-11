@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
 import 'package:food_apps/controllers/cart_controller.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
+import 'package:food_apps/pages/auth/signin_page.dart';
+import 'package:food_apps/pages/auth/signup_page.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'controllers/popular_product_controller.dart';
@@ -37,9 +39,9 @@ class MyApp extends StatelessWidget {
               ),
               scaffoldBackgroundColor: Colors.white,
             ),
-            //home: const SplashScreen(),
-            initialRoute: RouteHelper.getSplashPage(),
-            getPages: RouteHelper.routes,
+            home: const SignInPage(),
+            /*initialRoute: RouteHelper.getSplashPage(),
+            getPages: RouteHelper.routes,*/
           );
         });
       });
