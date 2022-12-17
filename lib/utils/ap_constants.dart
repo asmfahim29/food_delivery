@@ -8,6 +8,8 @@ class AppConstants {
   static const String RECOMMANDED_PRODUCT_URI = "/api/v1/products/recommended";
   static const String UPLOAD_URL =
       "/uploads/"; //some problem here need to study.
+  //auth end point
+  static const String Registration_URI = "/api/v1/auth/register";
 
   static const String TOKEN = "DBtoken";
   static const String CART_LIST = "Cart-List";

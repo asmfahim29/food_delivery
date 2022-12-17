@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../controllers/cart_controller.dart';
 import '../../controllers/popular_product_controller.dart';
 import '../../controllers/recommended_product_controller.dart';
+import '../../widgets/big_text.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -63,10 +64,14 @@ class _SplashPageState extends State<SplashScreen>
             scale: animation,
             child: Center(
               child: Image.asset(
-                'assets/images/splLogo.png',
+                'assets/images/logo.png',
                 width: Dimensions.splashImg,
               ),
             ),
+          ),
+          BigText(
+            text: 'The taste is here',
+            size: Dimensions.fontBigS20 + Dimensions.fontBigS20,
           ),
         ],
       ),

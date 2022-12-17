@@ -1,3 +1,4 @@
+import 'package:food_apps/controllers/auth_controller.dart';
 import 'package:food_apps/controllers/cart_controller.dart';
 import 'package:food_apps/controllers/popular_product_controller.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
@@ -9,6 +10,8 @@ import 'package:food_apps/utils/ap_constants.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../data/repositories/auth_repo.dart';
+
 Future<void> init() async {
   //local storage
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -18,11 +21,14 @@ Future<void> init() async {
 
   //repos
   //repos are dedicated to get and store data from anywhere.
+  Get.lazyPut(
+      () => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => CartRepo(sharedPreferences: Get.find()));
 
   //controllers
+  Get.lazyPut(() => AuthController(authRepo: Get.find()));
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
   Get.lazyPut(
       () => RecommendedProductController(recommendedProductRepo: Get.find()));

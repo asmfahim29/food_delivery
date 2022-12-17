@@ -14,8 +14,6 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
-    TextEditingController nameController = TextEditingController();
-    TextEditingController phoneController = TextEditingController();
 
     var signupImage = ['instagram.png', 'facebook.png', 'google.png'];
 
