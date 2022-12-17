@@ -4,6 +4,7 @@ import 'package:food_apps/controllers/cart_controller.dart';
 import 'package:food_apps/controllers/recommended_product_controller.dart';
 import 'package:food_apps/pages/auth/signin_page.dart';
 import 'package:food_apps/pages/auth/signup_page.dart';
+import 'package:food_apps/pages/splash/splash_page.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'controllers/popular_product_controller.dart';

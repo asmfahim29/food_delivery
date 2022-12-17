@@ -32,6 +32,7 @@ class AppTextField extends StatelessWidget {
           ]),
       child: TextField(
         controller: textEditingController,
+        style: TextStyle(color: Colors.black),
         decoration: InputDecoration(
           hintText: hintText,
           prefixIcon: Icon(

@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_apps/base/show_custom_snackbar.dart';
 import 'package:food_apps/colors.dart';
+import 'package:food_apps/models/signup_body_model.dart';
 import 'package:food_apps/utils/dimensions.dart';
 import 'package:food_apps/widgets/app_text_field.dart';
 import 'package:food_apps/widgets/big_text.dart';
@@ -17,6 +19,35 @@ class SignUpPage extends StatelessWidget {
     TextEditingController phoneController = TextEditingController();
 
     var signupImage = ['instagram.png', 'facebook.png', 'google.png'];
+
+    void _registration() {
+      String name = nameController.text.trim();
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+      String phone = phoneController.text.trim();
+      if (name.isEmpty) {
+        showCustomSnackBar("Type in your name", title: "Name");
+      } else if (phone.isEmpty) {
+        showCustomSnackBar("Type in your phone number", title: "Phone number");
+      } else if (email.isEmpty) {
+        showCustomSnackBar("Type in your email", title: "Email");
+      } else if (!GetUtils.isEmail(email)) {
+        showCustomSnackBar("Type in your valid email address",
+            title: "Valid email address");
+      } else if (password.isEmail) {
+        showCustomSnackBar("Type in your password", title: "Password");
+      } else if (password.length < 6) {
+        showCustomSnackBar("Password cannot be less than 6", title: "Password");
+      } else {
+        showCustomSnackBar(
+          "All went well",
+          title: "Successful",
+        );
+        SignupBody signupBody = SignupBody(
+            name: name, phone: phone, email: email, password: password);
+        print(signupBody);
+      }
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -39,22 +70,6 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
             AppTextField(
-              textEditingController: emailController,
-              icon: Icons.email_outlined,
-              hintText: 'Enter email',
-            ),
-            SizedBox(
-              height: Dimensions.height20,
-            ),
-            AppTextField(
-              textEditingController: passwordController,
-              icon: Icons.password_sharp,
-              hintText: 'Enter password',
-            ),
-            SizedBox(
-              height: Dimensions.height20,
-            ),
-            AppTextField(
               textEditingController: nameController,
               icon: Icons.person_outline,
               hintText: 'Enter name',
@@ -70,18 +85,39 @@ class SignUpPage extends StatelessWidget {
             SizedBox(
               height: Dimensions.height20,
             ),
-            Container(
-              height: Dimensions.screenHeight / 13,
-              width: Dimensions.screenWidth / 2.2,
-              decoration: BoxDecoration(
-                color: AppColor.mainColor,
-                borderRadius: BorderRadius.circular(Dimensions.radius30),
-              ),
-              alignment: Alignment.center,
-              child: BigText(
-                text: "Sign up",
-                size: Dimensions.fontBigS26,
-                color: Colors.white,
+            AppTextField(
+              textEditingController: emailController,
+              icon: Icons.email_outlined,
+              hintText: 'Enter email',
+            ),
+            SizedBox(
+              height: Dimensions.height20,
+            ),
+            AppTextField(
+              textEditingController: passwordController,
+              icon: Icons.password_sharp,
+              hintText: 'Enter password',
+            ),
+            SizedBox(
+              height: Dimensions.height20,
+            ),
+            GestureDetector(
+              onTap: () {
+                _registration();
+              },
+              child: Container(
+                height: Dimensions.screenHeight / 13,
+                width: Dimensions.screenWidth / 2.2,
+                decoration: BoxDecoration(
+                  color: AppColor.mainColor,
+                  borderRadius: BorderRadius.circular(Dimensions.radius30),
+                ),
+                alignment: Alignment.center,
+                child: BigText(
+                  text: "Sign up",
+                  size: Dimensions.fontBigS26,
+                  color: Colors.white,
+                ),
               ),
             ),
             RichText(
