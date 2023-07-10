@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_apps/colors.dart';
 import 'package:food_apps/utils/dimensions.dart';

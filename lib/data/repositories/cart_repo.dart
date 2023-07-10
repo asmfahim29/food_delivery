@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:food_apps/utils/ap_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../models/cart_model.dart';
 
 class CartRepo {

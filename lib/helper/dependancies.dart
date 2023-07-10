@@ -9,7 +9,6 @@ import 'package:food_apps/data/repositories/recommended_product_repo.dart';
 import 'package:food_apps/utils/ap_constants.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../data/repositories/auth_repo.dart';
 
 Future<void> init() async {
