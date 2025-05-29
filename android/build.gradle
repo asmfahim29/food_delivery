@@ -11,6 +11,10 @@ buildscript {
     }
 }
 
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android' // if kotlin used
+apply plugin: 'flutter'
+
 allprojects {
     repositories {
         google()
